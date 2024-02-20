@@ -1,0 +1,7 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:actionOverride,lightning:hasPageReference"
+    access="global">
+    <aura:handler 
+        name="init" 
+        action="{!c.newDocumentFile}" 
+        value="{!this}"/>
+</aura:component>
