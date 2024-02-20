@@ -1,0 +1,77 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={showSpinner}>
+        <div>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <lightning-card title="Upload a file" icon-name="doctype:attachment">
+        <div class="slds-var-m-around_medium">
+            <span class="title-description">Título</span>
+            <lightning-input 
+                data-id="title" 
+                type="text"
+                label="Título do arquivo"
+                placeholder="Digite o nome do arquivo..."
+                required
+                onchange={handleTitle}>
+            </lightning-input>
+        </div>
+        <div class="slds-var-m-around_medium">
+            <span class="title-description">Descrição</span>
+            <lightning-textarea 
+                data-id="description" 
+                rows="2" 
+                label="Descrição do Arquivo"
+                placeholder="Descrição do arquivo..."
+                required 
+                onchange={handleDescription}>
+            </lightning-textarea>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-input 
+                type="file" 
+                accept=".xlsx, .xls, .csv, .png, .jpg, .jpeg, .doc, .docx, .jfif, .pdf, .gif"
+                placeholder="Upload files"
+                label="Arquivos" 
+                required
+                onchange={openfileUpload}>
+            </lightning-input>
+            <p class="slds-text-body_small">Tamanho máximo suportado: 6MB</p>
+        </div>
+        <template for:each={fieldData} for:item="field" for:index="index">
+            <div class="slds-m-around_medium container-image" key={field.filename}>
+                <p class="column-left">{field.filename}</p>
+                <div class="column-right">
+                    <template if:true={getPreviewImage}>
+                        <button data-id={field.url} onclick={handlePreviewFile}>
+                            <lightning-icon icon-name="action:preview"></lightning-icon>
+                        </button>
+                    </template>
+                    <button data-id={field.url} onclick={handleDeleteFile}>
+                        <lightning-icon icon-name="action:close"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+        </template>
+        <div class="footer slds-m-around_medium">
+            <lightning-button 
+                style="font-size:8pt!important;" 
+                variant="brand" 
+                label="Save" 
+                title="Submit"
+                onclick={handleSaveFile}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+    <template if:true={previewImage}>
+        <span class="close" onclick={handleCancel}>&times;</span>
+        <div class="modal">
+            <div class="popup-preview">
+                <div class="visualization">
+                    <img width="50%" src={urlValue} />
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

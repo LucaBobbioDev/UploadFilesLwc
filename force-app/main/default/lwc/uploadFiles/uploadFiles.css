@@ -1,0 +1,100 @@
+.title-description {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    font-weight: bold;
+    font-size: 13pt;
+}
+
+.container-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    padding: 10px;
+    
+    border: solid 1px rgba(176, 174, 174, 0.363);
+    border-radius: 5px;
+}
+
+.column-left {
+    width: 60%;
+    align-self: center;
+
+    float: left;
+    padding: 0px 5px 0px 5px;
+}
+
+.column-right {
+    width: 40%;
+    align-self: center;
+
+    display: flex;
+    justify-content: end;
+}
+
+.footer {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+
+textarea {
+    width: 100%;
+
+    font-size: 10pt;
+
+    resize: none;
+    visibility: visible;
+
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.close {
+    z-index: 99999;
+    position: fixed !important;
+
+    float: right;
+    right: 80px;
+    top: 60px;
+
+    font-size: 50px;
+    font-weight: bold;
+
+    color: white;
+}
+
+.close:hover,
+.close:focus {
+    color: snow;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal {
+    z-index: 9999;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    
+    display: flex;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-preview {
+    z-index: 10000;
+    align-self: center;
+}
+
+.image-preview{
+    width: 50%;
+}
