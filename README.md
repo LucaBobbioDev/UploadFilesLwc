@@ -1,18 +1,26 @@
-# Salesforce DX Project: Next Steps
+# Upload Files with LWC - Salesforce DX Project
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Simples projeto realizado e desenvolvido no CRM Salesforce onde foi desenvolvido a funcionalidade de upload de arquivos a partir de uma tela customizada feita com Lightning Web Components e uma classe Apex.
 
-## How Do You Plan to Deploy Your Changes?
+## Componente de Lightning Web Components
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- UploadFiles: Único componente que incorpora a funcionalidade de realizar um upload de arquivo, além de criar um registro do objeto Document__c referente aquele arquivo.
 
-## Configure Your Salesforce DX Project
+## Componente Aura
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- CallUploadFiles: Componente aura que é usado no quick action `New` da página do objeto Document__c. Possui a funcionalidade de chamar e renderizar a página composta pelo componente UploadFiles.
 
-## Read All About It
+## Classe Apex
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+- UploadFilesController: Classe controller do componente LWC UploadFiles. Possui métodos que criam registros dos objetos Document__c, ContentVersion, ContentDocument e ContentDocumentLink.
+
+## Visualização da Página Customizada
+
+Tela `list view` do objeto Document__c
+![List View of Document__c](image.png)
+
+Página principal composta pelo componente UploadFiles LWC
+![UploadFiles LWC Component](image-1.png)
+
+Página de Registro do Objeto Document__c
+![Record Page of Document__c](image-2.png)
