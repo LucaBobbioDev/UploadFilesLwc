@@ -2,7 +2,7 @@
 * @ClassName : UploadFilesController
 * @Purpose   : Controller class for uploadFiles lwc  component
 * @Author    : Luca Bobbio
-* @Date      : 19/02/2023
+* @Date      : 19/02/2024
 
 ********************************************************************************************/
 public with sharing class UploadFilesController {
@@ -16,11 +16,16 @@ public with sharing class UploadFilesController {
     */ 
     @AuraEnabled
     public static String createDocRecord(String title, String description, String base64, String filename){
+        if (title == null || description == null || base64 == null || filename == null) { 
+            return null; 
+        }
+
         Document__c newDocumentRecord = new Document__c(
             Name = title + ' - ' + System.today().format(),
             Title__c = title,
             Description__c = description
         );
+
         try {
             if(Schema.SObjectType.Document__c.isAccessible() && Schema.SObjectType.Document__c.isCreateable()){
                 Database.SaveResult insertRecordResult = Database.insert(newDocumentRecord, true);
@@ -64,6 +69,10 @@ public with sharing class UploadFilesController {
     * @Author     : Luca Bobbio
     */ 
     private static ContentVersion createContentVersion(String base64, String filename) {
+        if (base64 == null || filename == null) { 
+            return null; 
+        }
+
         ContentVersion newContentVersionRecord = new ContentVersion(
             VersionData = EncodingUtil.base64Decode(base64),
             Title = filename,
