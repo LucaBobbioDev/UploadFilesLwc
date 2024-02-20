@@ -1,9 +1,11 @@
 import { LightningElement, track } from 'lwc';
+
+import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import createDocRecord from '@salesforce/apex/UploadFilesController.createDocRecord'
 
-export default class UploadFiles extends LightningElement {
+export default class UploadFiles extends NavigationMixin(LightningElement) {
     @track urlValue;
     @track title = '';
     @track description = '';
@@ -111,15 +113,19 @@ export default class UploadFiles extends LightningElement {
             }).then((result) =>{
                 if(result == null){
                     this.showSpinner = false;
-                    this.showToast('error', 'Erro', 'Algum erro aconteceu')
+                    this.showToast('error', 'Erro', 'Algum erro aconteceu');
+                    console.log('Unsuccess result =>' + result);
                 }else{
+                    const recordId = result;
+                    console.log('Success result =>' + result);
                     this.showSpinner = false;
                     this.showToast(
                         'success', 
                         'Sucesso', 
                         'Arquivo criado com sucesso!'
                     )
-                    window.location.reload()
+                    this.navigateToDocumentRecordPage(recordId)
+                    //window.location.reload()
                 }
             }).catch((error) =>{
                 console.error(error);
@@ -140,6 +146,17 @@ export default class UploadFiles extends LightningElement {
         }
     }
 
+    navigateToDocumentRecordPage(recordId) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: recordId,
+                objectApiName: 'Document__c',
+                actionName: 'view'
+            }
+        });
+    }
+    
     showToast(type, title, message) {
         let event = new ShowToastEvent({
             variant: type,
