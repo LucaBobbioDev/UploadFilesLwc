@@ -65,12 +65,14 @@ export default class UploadFiles extends NavigationMixin(LightningElement) {
     * Opens the file dialog and processes the selected file
     * @param {Event} event - The file upload event containing the selected file 
     */
+    // eslint-disable-next-line consistent-return
     openfileUpload(event){
         const file = event.detail.files[0]
         const acceptedFormats = this.acceptedFormats;
         
         const fileExtension = file.name.split('.').pop().toLowerCase();
         if (acceptedFormats.includes('.' + fileExtension)) {
+            // eslint-disable-next-line vars-on-top
             var reader = new FileReader()
             reader.onload = () => {
                 var base64 = reader.result.split(',')[1]
@@ -129,7 +131,7 @@ export default class UploadFiles extends NavigationMixin(LightningElement) {
     */
     handleDeleteFile(event){
         const itemToRemove = this.fieldData.find(
-            element => element.url == event.currentTarget.dataset.id
+            element => element.url === event.currentTarget.dataset.id
         )
         this.fieldData =this.fieldData.filter(function(item) {
             return item !== itemToRemove
@@ -140,6 +142,7 @@ export default class UploadFiles extends NavigationMixin(LightningElement) {
     * Handles the save file action by invoking the onSaveFile method after a short delay
     */
     handleSaveFile(){
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
         setTimeout(() => {
             this.onSaveFile();
         }, ONE_SECOND_DELAY);
@@ -153,7 +156,7 @@ export default class UploadFiles extends NavigationMixin(LightningElement) {
     */
     onSaveFile(){
         this.showSpinner = true;
-        if(this.description && !(this.fieldData.length == 0)){
+        if(this.description && !(this.fieldData.length === 0)){
             const { filename, base64 } = this.fieldData[0]
             createDocRecord({
                 title: this.title,
