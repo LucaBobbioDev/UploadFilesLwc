@@ -66,7 +66,7 @@ export default class UploadFiles extends NavigationMixin(LightningElement) {
     * @param {Event} event - The file upload event containing the selected file 
     */
     // eslint-disable-next-line consistent-return
-    openfileUpload(event){
+    openFileUpload(event){
         const file = event.detail.files[0]
         const acceptedFormats = this.acceptedFormats;
         
