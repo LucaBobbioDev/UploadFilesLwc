@@ -43,11 +43,11 @@
                 <p class="column-left">{field.filename}</p>
                 <div class="column-right">
                     <template if:true={getPreviewImage}>
-                        <button data-id={field.url} onclick={handlePreviewFile}>
+                        <button class="preview-button" data-id={field.url} onclick={handlePreviewFile}>
                             <lightning-icon icon-name="action:preview"></lightning-icon>
                         </button>
                     </template>
-                    <button data-id={field.url} onclick={handleDeleteFile}>
+                    <button class="delete-button" data-id={field.url} onclick={handleDeleteFile}>
                         <lightning-icon icon-name="action:close"></lightning-icon>
                     </button>
                 </div>
